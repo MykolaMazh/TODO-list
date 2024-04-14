@@ -1,0 +1,49 @@
+.body{
+    background-color: burlywood;
+}
+
+.main{
+    margin: 20px 10px;
+}
+
+.sidebar ul{
+    list-style: none;
+}
+
+.sidebar li{
+    border: blue solid 2px;
+    margin: 2px;
+    padding: 3px;
+    background-color: bisque;
+    font-size: 2em;
+    text-align: end;
+}
+
+.sidebar a{
+    text-decoration: none;
+}
+
+.deadline{
+    color: red;
+}
+
+.done{
+    color: green;
+    font-size: 0.9em;
+}
+
+.not-done{
+    color: red;
+    font-size: 0.9em;
+}
+
+.tag{
+    background-color: darkgrey;
+    padding: 10px;
+    margin: 10px 5px;
+    border-radius: 10px;
+}
+
+h5.card-title{
+    margin-bottom: 1.5em;
+}

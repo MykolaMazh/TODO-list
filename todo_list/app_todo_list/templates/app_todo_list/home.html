@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}
-	TODO-List
+  TODO-List
 {% endblock %}
 
 {% block content %}
@@ -19,11 +19,11 @@
           {{ object }}
           {% if object.is_done %}
             <span class="done">Done</span>
-            <a href="#" class="btn btn-secondary">Undo</a>
+            <a  class="btn btn-secondary" href="{% url 'todo_list:update_task_status'  object.pk %}">Undo</a>
             </h5>
           {% else %}
             <span class="not-done">Not done</span>
-            <a href="#" class="btn btn-success">Complete</a>
+            <a  class="btn btn-success" href="{% url 'todo_list:update_task_status'  object.pk %}">Complete</a>
             </h5>
           {% endif %}
         <p class="card-text">Tags:

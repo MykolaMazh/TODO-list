@@ -19,7 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-3gy#_+r50vx@&v6h4tg3mxwn81gt($zv=8w!%tx)iekfpf9qx4"
+SECRET_KEY = (
+    "django-insecure-3gy#_+r50vx@&v6h4tg3mxwn81gt($zv=8w!%tx)iekfpf9qx4"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +40,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "crispy_forms",
     "crispy_bootstrap5",
-    "app_todo_list.apps.AppTodoListConfig"
+    "app_todo_list.apps.AppTodoListConfig",
 ]
 
 MIDDLEWARE = [
@@ -57,7 +59,12 @@ ROOT_URLCONF = "todo_list.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "DIRS": [
+            os.path.join(
+                BASE_DIR,
+                "templates",
+            )
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -127,7 +134,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
-
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

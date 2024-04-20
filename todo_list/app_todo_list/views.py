@@ -1,10 +1,10 @@
 from django.db.models import Case, When, Value
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from .forms import TaskForm
-from .models import Task
+from .models import Task, Tag
 
 
 class TodoListView(ListView):
@@ -36,3 +36,12 @@ class TaskUpdateView(UpdateView):
             return redirect("todo_list:home")
         else:
             return super().get(request, *args, **kwargs)
+
+class TaskDeleteView(DeleteView):
+    model = Task
+    success_url = reverse_lazy("todo_list:home")
+
+
+class TagListView(ListView):
+    model = Tag
+

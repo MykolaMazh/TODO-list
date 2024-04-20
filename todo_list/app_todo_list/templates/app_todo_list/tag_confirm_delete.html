@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>You are going to delete task - <b>{{ object }}</b></h1>
-  <h2>with status - <b>{{ object.is_done|yesno:"Completed,Not completed" }}</b></h2>
+  <h1>You are going to delete tag - <b>{{ object }}</b></h1>
   <form method="post">
   {% csrf_token %}
     <button type="submit" class="btn btn-danger">Delete</button>

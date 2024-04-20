@@ -1,8 +1,7 @@
 from django.db.models import Case, When, Value
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView
-
+from django.views.generic import ListView, CreateView, UpdateView
 
 from .forms import TaskForm
 from .models import Task
@@ -22,10 +21,18 @@ class TaskCreateView(CreateView):
     template_name = "app_todo_list/task_form.html"
 
 
-def update_task_status(request, pk):
-    Task.objects.filter(pk=pk).update(
-        is_done=Case(
-            When(is_done=True, then=Value(False)), default=Value(True)
-        )
-    )
-    return redirect("todo_list:home")
+class TaskUpdateView(UpdateView):
+    model = Task
+    success_url = reverse_lazy("todo_list:home")
+    fields = "__all__"
+    
+    def get(self, request, *args, **kwargs):
+        if kwargs["change_status"]:
+            Task.objects.filter(pk=kwargs["pk"]).update(
+                is_done=Case(
+                    When(is_done=True, then=Value(False)), default=Value(True)
+                )
+            )
+            return redirect("todo_list:home")
+        else:
+            return super().get(request, *args, **kwargs)

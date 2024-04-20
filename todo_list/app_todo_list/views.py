@@ -45,3 +45,14 @@ class TaskDeleteView(DeleteView):
 class TagListView(ListView):
     model = Tag
 
+
+class TagUpdateView(UpdateView):
+    model = Tag
+    success_url = reverse_lazy("todo_list:tag-list")
+    fields = "__all__"
+
+
+class TagDeleteView(DeleteView):
+    model = Tag
+    success_url = reverse_lazy("todo_list:tag-list")
+

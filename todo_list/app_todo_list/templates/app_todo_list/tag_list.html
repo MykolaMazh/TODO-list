@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Tags
+{% endblock %}
+
+{% block content %}
+	<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Title</th>
+      <th scope="col">Update</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for tag in object_list %}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{ tag.name }}</td>
+      <td><a href="{% url 'todo_list:tag-update' tag.pk %}" class="btn btn-info">Update</a></td>
+      <td><a href="{% url 'todo_list:tag-delete' tag.pk %}" class="btn btn-danger">Delete</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

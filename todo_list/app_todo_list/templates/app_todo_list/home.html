@@ -19,11 +19,19 @@
           {{ object }}
           {% if object.is_done %}
             <span class="done">Done</span>
-            <a  class="btn btn-secondary" href="{% url 'todo_list:task-update'  object.pk 1 %}">Undo</a>
+            <form method="post" action="{% url 'todo_list:task-update'  object.pk %}" class="update-status">
+              {% csrf_token %}
+              <input type="hidden" name="change-task-status" value="change">
+              <button type="submit" class="btn btn-secondary">Undo</button>
+            </form>
             </h5>
           {% else %}
             <span class="not-done">Not done</span>
-            <a  class="btn btn-success" href="{% url 'todo_list:task-update'  object.pk 1 %}">Complete</a>
+            <form method="post" action="{% url 'todo_list:task-update'  object.pk %}" class="update-status">
+              {% csrf_token %}
+              <input type="hidden" name="change-task-status" value="change">
+              <button type="submit" class="btn btn-success">Complete</button>
+            </form>
             </h5>
           {% endif %}
         <p class="card-text">Tags:
@@ -32,7 +40,7 @@
           {% endfor %}
 
         </p>
-        <a href="{% url 'todo_list:task-update'  object.pk 0 %}" class="btn btn-primary">Update</a>
+        <a href="{% url 'todo_list:task-update'  object.pk %}" class="btn btn-primary">Update</a>
         <a href="{% url 'todo_list:delete-task' object.pk %}" class="btn btn-primary">Delete</a>
       </div>
     </div>

@@ -26,8 +26,8 @@ class TaskUpdateView(UpdateView):
     success_url = reverse_lazy("todo_list:home")
     fields = "__all__"
 
-    def get(self, request, *args, **kwargs):
-        if kwargs["change_status"]:
+    def post(self, request, *args, **kwargs):
+        if request.POST.get("change-task-status"):
             Task.objects.filter(pk=kwargs["pk"]).update(
                 is_done=Case(
                     When(is_done=True, then=Value(False)), default=Value(True)
@@ -35,7 +35,7 @@ class TaskUpdateView(UpdateView):
             )
             return redirect("todo_list:home")
         else:
-            return super().get(request, *args, **kwargs)
+            return super().post(request, *args, **kwargs)
 
 
 class TaskDeleteView(DeleteView):

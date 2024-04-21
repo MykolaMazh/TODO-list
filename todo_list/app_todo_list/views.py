@@ -25,7 +25,7 @@ class TaskUpdateView(UpdateView):
     model = Task
     success_url = reverse_lazy("todo_list:home")
     fields = "__all__"
-    
+
     def get(self, request, *args, **kwargs):
         if kwargs["change_status"]:
             Task.objects.filter(pk=kwargs["pk"]).update(
@@ -36,6 +36,7 @@ class TaskUpdateView(UpdateView):
             return redirect("todo_list:home")
         else:
             return super().get(request, *args, **kwargs)
+
 
 class TaskDeleteView(DeleteView):
     model = Task
@@ -50,6 +51,7 @@ class TagCreateView(CreateView):
     model = Tag
     success_url = reverse_lazy("todo_list:tag-list")
     fields = "__all__"
+
 
 class TagUpdateView(UpdateView):
     model = Tag

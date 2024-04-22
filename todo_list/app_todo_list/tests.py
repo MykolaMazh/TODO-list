@@ -1,7 +1,6 @@
-from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from .models import Task
+from app_todo_list.models import Task
 from django.urls import reverse
 
 
@@ -24,7 +23,7 @@ class TaskUpdateViewTest(TestCase):
         self.assertEqual(Task.objects.get(pk=1).is_done, False)
 
     def test_post_default(self):
-        response = self.client.get(
+        response = self.client.post(
             reverse("todo_list:task-update", args=[1])
         )
         self.assertEqual(Task.objects.get(pk=1).is_done, False)

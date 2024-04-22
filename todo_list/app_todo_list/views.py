@@ -3,8 +3,8 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from .forms import TaskForm
-from .models import Task, Tag
+from app_todo_list.forms import TaskForm
+from app_todo_list.models import Task, Tag
 
 
 class TodoListView(ListView):

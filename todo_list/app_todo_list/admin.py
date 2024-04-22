@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Tag, Task
+from app_todo_list.models import Tag, Task
 
 
 class TaskAdmin(admin.ModelAdmin):

@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,11 +22,28 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
+# creates vars from sample.env
+sample_env_path = os.path.join(Path(BASE_DIR).resolve().parent, "sample.env")
+with open(sample_env_path, "r") as file:
+    rows_number = len(file.readlines())
+
+with open(sample_env_path, "r") as file:
+    for row_number in range(rows_number):
+        row = file.readline()
+        row_split = row.split("=")
+        variable_value = (
+            row_split[1][:-1] if "\n" in row_split[1] else row_split[1]
+        )
+        variable = globals()[f"{row_split[0]}"] = variable_value
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", SECRET_KEY)
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -126,7 +144,6 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

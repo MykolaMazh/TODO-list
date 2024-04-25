@@ -12,5 +12,3 @@ Application to create, update and delete tasks.
 >   ```python
 >   YOUR_VAR1=your_var1_value
 >   YOUR_VAR2=your var2 value```
-
-   

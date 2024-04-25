@@ -1,0 +1,22 @@
+{% extends  "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}
+{{ object|yesno:"Update the tag,Create a new tag" }}
+{% endblock %}
+
+{% block content %}
+  {% if object %}
+    <h1>Update the tag <i>{{ object.description }}</i></h1>
+  {% else %}
+    <h1>Create a new tag</h1>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-success">
+      Save
+    </button>
+  </form>
+{% endblock %}

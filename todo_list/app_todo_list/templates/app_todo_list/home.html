@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+  TODO-List
+{% endblock %}
+
+{% block content %}
+  <h1>TODO LIST <a href="{% url 'todo_list:create-task' %}" class="btn btn-info">Add new task</a></h1>
+
+  {% for object in object_list %}
+    <div class="card">
+      <div class="card-header">
+        {{ forloop.counter }}. Created: {{ object.created_at }}
+        {% if object.deadline %}
+          <span class="deadline">DEADLINE: {{ object.deadline }}</span>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ object }}
+          {% if object.is_done %}
+            <span class="done">Done</span>
+            <form method="post" action="{% url 'todo_list:task-update'  object.pk %}" class="update-status">
+              {% csrf_token %}
+              <input type="hidden" name="change-task-status" value="change">
+              <button type="submit" class="btn btn-secondary">Undo</button>
+            </form>
+            </h5>
+          {% else %}
+            <span class="not-done">Not done</span>
+            <form method="post" action="{% url 'todo_list:task-update'  object.pk %}" class="update-status">
+              {% csrf_token %}
+              <input type="hidden" name="change-task-status" value="change">
+              <button type="submit" class="btn btn-success">Complete</button>
+            </form>
+            </h5>
+          {% endif %}
+        <p class="card-text">Tags:
+          {% for tag in object.tags.all %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+
+        </p>
+        <a href="{% url 'todo_list:task-update'  object.pk %}" class="btn btn-primary">Update</a>
+        <a href="{% url 'todo_list:delete-task' object.pk %}" class="btn btn-primary">Delete</a>
+      </div>
+    </div>
+
+  {% endfor %}
+
+{% endblock %}
